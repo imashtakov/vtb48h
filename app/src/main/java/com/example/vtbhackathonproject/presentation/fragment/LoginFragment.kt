@@ -1,6 +1,7 @@
 package com.example.vtbhackathonproject.presentation.fragment
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,12 @@ import com.example.vtbhackathonproject.model.LoginModel
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.LoginActivityRepository
 import com.google.firebase.functions.FirebaseFunctions
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_login_phone.*
 
-class LoginFragment(repository: LoginActivityRepository) : BaseFragment<LoginModel>(repository) {
+class LoginFragment(private val repository: LoginActivityRepository) : BaseFragment<LoginModel>(repository) {
 
     companion object {
         val TAG = LoginFragment::class.simpleName
@@ -25,8 +29,14 @@ class LoginFragment(repository: LoginActivityRepository) : BaseFragment<LoginMod
         super.onViewCreated(view, savedInstanceState)
         sendBtn.setOnClickListener {
             model.getUserAddress(etLoginName.text.toString())
+//                .observeOn(Schedulers.io())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe{ address ->
+                    repository.saveAddress(address)
+                }
         }
     }
 
-    override fun initModel(): LoginModel = LoginModel(FirebaseFunctions.getInstance())
+    override fun initModel(): LoginModel =
+        LoginModel(FirebaseFunctions.getInstance())
 }

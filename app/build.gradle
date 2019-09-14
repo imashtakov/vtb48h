@@ -51,6 +51,7 @@ dependencies {
     implementation libraries.gson
     implementation libraries.gsonConverter
     implementation libraries.rxjava
+    implementation libraries.rxAndroid
     implementation libraries.goldfinger
     implementation libraries.goldfingerRx
     implementation libraries.fbMessaging

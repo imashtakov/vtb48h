@@ -1,31 +1,32 @@
 package com.example.vtbhackathonproject.model
 
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.example.vtbhackathonproject.User
 import com.example.vtbhackathonproject.model.base.BaseModel
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import io.reactivex.Completable
 import io.reactivex.Single
+import io.reactivex.SingleOnSubscribe
 
 class LoginModel(fbFunctions: FirebaseFunctions) : BaseModel(fbFunctions) {
 
-    fun getUserAddress(userName: String): Single<User> = Single.create { subscriber ->
-        val data = hashMapOf(
-            "userName" to userName
-        )
+    fun getUserAddress(userName: String): Single<String> = Single.create {subscriber ->
         fbFunctions.getHttpsCallable("getUserAddress")
-            .call(data)
-            .continueWith { task ->
-                val result = task.result?.data as String
-                print("result recieve = $result")
-                result
-            }.addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    val exception = task.exception
-                    if (exception is FirebaseFunctionsException) {
-                        print(exception.code)
-                        print(exception.details)
+            .call(userName)
+            .addOnSuccessListener { task ->
+                val address = task.data as String?
+                if (!subscriber.isDisposed) {
+                    if(address != null) {
+                        subscriber.onSuccess(address)
+                    } else {
+                        subscriber.onError(Throwable("User not found"))
                     }
                 }
+            }
+            .addOnFailureListener { task ->
+                task.stackTrace
             }
     }
 }

@@ -19,7 +19,6 @@ class LoginActivity : BaseActivity<LoginActivityRepository>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        FirebaseApp.initializeApp(this)
         navigator = FragmentNavigator(supportFragmentManager)
         navigator.moveTo(LoginFragment(repository), false, R.id.container)
     }

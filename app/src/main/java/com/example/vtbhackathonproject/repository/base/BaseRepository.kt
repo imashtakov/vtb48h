@@ -1,4 +1,6 @@
 package com.example.vtbhackathonproject.repository.base
 
-abstract class BaseRepository {
+import android.content.SharedPreferences
+
+abstract class BaseRepository(protected val preferences: SharedPreferences) {
 }

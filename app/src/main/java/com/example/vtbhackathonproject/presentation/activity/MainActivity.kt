@@ -1,5 +1,7 @@
 package com.example.vtbhackathonproject.presentation.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.presentation.FragmentNavigator
@@ -18,6 +20,24 @@ class MainActivity : BaseActivity<MainActivityRepository>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navigator = FragmentNavigator(supportFragmentManager)
+        val intent = Intent("com.google.zxing.client.android.SCAN")
+        intent.setPackage("com.google.zxing.client.android")
+        intent.putExtra("SCAN_MODE", "QR_CODE_MODE")
+        startActivityForResult(intent, 0)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0) {
+            if (resultCode == Activity.RESULT_OK) {
+                val contents = data?.getStringExtra("SCAN_RESULT")
+                val format = data?.getStringExtra("SCAN_RESULT_FORMAT")
+                print("Result : $contents, $format")
+                // Handle successful scan
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                // Handle cancel
+            }
+        }
     }
 
     override fun initRepository(): MainActivityRepository = MainActivityRepository()

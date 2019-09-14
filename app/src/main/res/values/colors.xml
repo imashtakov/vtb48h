@@ -15,4 +15,6 @@
     <color name="transparent">#00000000</color>
     <color name="violet">#decaf6</color>
     <color name="light_yellow">#fff45a</color>
+    <color name="shadow_camera">#4a3f3f3f</color>
+
 </resources>

@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.presentation.FragmentNavigator
 import com.example.vtbhackathonproject.presentation.base.BaseActivity
-import com.example.vtbhackathonproject.presentation.fragment.LoginPhoneFragment
 import com.example.vtbhackathonproject.repository.MainActivityRepository
 
 class MainActivity : BaseActivity<MainActivityRepository>() {
@@ -29,12 +28,12 @@ class MainActivity : BaseActivity<MainActivityRepository>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0) {
-            if (resultCode == Activity.RESULT_OK) {
+            if (resultCode == RESULT_OK) {
                 val contents = data?.getStringExtra("SCAN_RESULT")
                 val format = data?.getStringExtra("SCAN_RESULT_FORMAT")
                 print("Result : $contents, $format")
                 // Handle successful scan
-            } else if (resultCode == Activity.RESULT_CANCELED) {
+            } else if (resultCode == RESULT_CANCELED) {
                 // Handle cancel
             }
         }

@@ -8,6 +8,7 @@ import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.model.TestModel
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.MainActivityRepository
+import com.google.firebase.functions.FirebaseFunctions
 
 class TestFragment2(repository: MainActivityRepository) : BaseFragment<TestModel>(repository) {
 
@@ -19,5 +20,5 @@ class TestFragment2(repository: MainActivityRepository) : BaseFragment<TestModel
         return inflater.inflate(R.layout.fragment_test2, container, false)
     }
 
-    override fun initModel(): TestModel = TestModel()
+    override fun initModel(): TestModel = TestModel(FirebaseFunctions.getInstance())
 }

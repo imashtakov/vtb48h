@@ -7,7 +7,7 @@ import com.example.vtbhackathonproject.model.QrCodeModel
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.base.BaseRepository
 import android.content.Intent
-
+import com.google.firebase.functions.FirebaseFunctions
 
 
 class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(repository) {
@@ -35,5 +35,5 @@ class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(rep
         }
     }
 
-    override fun initModel(): QrCodeModel = QrCodeModel()
+    override fun initModel(): QrCodeModel = QrCodeModel(FirebaseFunctions.getInstance())
 }

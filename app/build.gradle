@@ -6,6 +6,7 @@ apply plugin: "$gradlePlugins.kotlin"
 apply plugin: "$gradlePlugins.kotlinExtensions"
 apply plugin: "$gradlePlugins.kapt"
 apply plugin: "$gradlePlugins.realm"
+apply plugin: "$gradlePlugins.googleServices"
 
 android {
     compileSdkVersion 29
@@ -42,7 +43,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
 
     implementation libraries.picasso
     implementation libraries.retrofit
@@ -54,5 +55,6 @@ dependencies {
     implementation libraries.goldfingerRx
     implementation libraries.fbMessaging
     implementation libraries.kotlinReflect
+    implementation libraries.fbFunctions
 
 }

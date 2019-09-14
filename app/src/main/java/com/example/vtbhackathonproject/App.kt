@@ -1,6 +1,7 @@
 package com.example.vtbhackathonproject
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -13,6 +14,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this)
         retrofit = Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create(Gson()))

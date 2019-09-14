@@ -9,7 +9,7 @@ import com.example.vtbhackathonproject.model.TestModel
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.MainActivityRepository
 
-class TestFragment(repository : MainActivityRepository) : BaseFragment<TestModel>(repository) {
+class TestFragment(private val repository : MainActivityRepository) : BaseFragment<TestModel>(repository) {
 
     companion object {
         val TAG = TestFragment::class.simpleName

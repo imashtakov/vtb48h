@@ -10,7 +10,7 @@ import android.content.Intent
 
 
 
-class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel, BaseRepository>(repository) {
+class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(repository) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

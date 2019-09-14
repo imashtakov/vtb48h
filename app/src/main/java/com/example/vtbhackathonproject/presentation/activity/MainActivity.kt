@@ -1,11 +1,11 @@
 package com.example.vtbhackathonproject.presentation.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.presentation.FragmentNavigator
 import com.example.vtbhackathonproject.presentation.base.BaseActivity
+import com.example.vtbhackathonproject.presentation.fragment.LoginPhoneFragment
 import com.example.vtbhackathonproject.repository.MainActivityRepository
 
 class MainActivity : BaseActivity<MainActivityRepository>() {
@@ -41,4 +41,9 @@ class MainActivity : BaseActivity<MainActivityRepository>() {
     }
 
     override fun initRepository(): MainActivityRepository = MainActivityRepository()
+
+    private fun startLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
 }

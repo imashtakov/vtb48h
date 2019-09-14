@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8dp"
+        android:elevation="@dimen/margin_24dp">
+
+    <LinearLayout
+            android:id="@+id/lLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/tvRestaurantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_8dp"
+                android:textSize="@dimen/text_size_18sp"
+                tools:text="restaurant"
+        />
+
+        <TextView
+                android:id="@+id/tvSum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/margin_8dp"
+                android:paddingEnd="@dimen/margin_8dp"
+                android:paddingBottom="@dimen/margin_8dp"
+                android:textSize="@dimen/text_size_12sp"
+                tools:text="restaurant"
+        />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

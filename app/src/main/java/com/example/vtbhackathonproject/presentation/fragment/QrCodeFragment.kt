@@ -55,7 +55,7 @@ class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(rep
         init()
     }
 
-    override fun initModel(): QrCodeModel = QrCodeModel(FirebaseFunctions.getInstance())
+    override fun initModel(): QrCodeModel = QrCodeModel()
 
     private fun init() {
         if (mayRequestCamera())

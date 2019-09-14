@@ -10,13 +10,14 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.SingleOnSubscribe
 
-class LoginModel(fbFunctions: FirebaseFunctions) : BaseModel(fbFunctions) {
+class LoginModel : BaseModel() {
 
     fun getUserAddress(userName: String): Single<String> = Single.create {subscriber ->
         fbFunctions.getHttpsCallable("getUserAddress")
             .call(userName)
             .addOnSuccessListener { task ->
-                val address = task.data as String?
+                val data = task.data as HashMap<String, String>?
+                val address = data?.get("address")
                 if (!subscriber.isDisposed) {
                     if(address != null) {
                         subscriber.onSuccess(address)

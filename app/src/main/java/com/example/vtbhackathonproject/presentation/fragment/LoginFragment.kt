@@ -33,10 +33,11 @@ class LoginFragment(private val repository: LoginActivityRepository) : BaseFragm
 //                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe{ address ->
                     repository.saveAddress(address)
+                    navigator.moveTo(CheckListFragment(repository), true, R.id.container)
                 }
         }
     }
 
     override fun initModel(): LoginModel =
-        LoginModel(FirebaseFunctions.getInstance())
+        LoginModel()
 }

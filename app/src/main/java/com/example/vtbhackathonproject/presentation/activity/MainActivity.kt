@@ -2,6 +2,7 @@ package com.example.vtbhackathonproject.presentation.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.presentation.FragmentNavigator
 import com.example.vtbhackathonproject.presentation.base.BaseActivity
@@ -13,7 +14,7 @@ class MainActivity : BaseActivity<MainActivityRepository>() {
         val TAG = MainActivity::class.simpleName
     }
 
-    lateinit var navigator : FragmentNavigator
+    lateinit var navigator: FragmentNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +40,8 @@ class MainActivity : BaseActivity<MainActivityRepository>() {
 //        }
 //    }
 
-    override fun initRepository(): MainActivityRepository = MainActivityRepository()
+    override fun initRepository(): MainActivityRepository =
+        MainActivityRepository(PreferenceManager.getDefaultSharedPreferences(this))
 
     private fun startLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)

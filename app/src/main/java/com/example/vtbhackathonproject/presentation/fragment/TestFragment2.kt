@@ -20,5 +20,5 @@ class TestFragment2(repository: MainActivityRepository) : BaseFragment<TestModel
         return inflater.inflate(R.layout.fragment_test2, container, false)
     }
 
-    override fun initModel(): TestModel = TestModel(FirebaseFunctions.getInstance())
+    override fun initModel(): TestModel = TestModel()
 }

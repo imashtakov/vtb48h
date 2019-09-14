@@ -6,11 +6,12 @@ import androidx.fragment.app.Fragment
 import com.example.vtbhackathonproject.model.base.BaseModel
 import com.example.vtbhackathonproject.presentation.FragmentNavigator
 import com.example.vtbhackathonproject.repository.MainActivityRepository
+import com.example.vtbhackathonproject.repository.base.BaseRepository
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class BaseFragment<M : BaseModel>(private val activityRepository: MainActivityRepository) : Fragment() {
+abstract class BaseFragment<M : BaseModel>(private val activityRepository: BaseRepository) : Fragment() {
 
     lateinit var model: M
     lateinit var navigator: FragmentNavigator

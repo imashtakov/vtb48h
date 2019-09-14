@@ -52,6 +52,7 @@ dependencies {
     implementation libraries.rxjava
     implementation libraries.goldfinger
     implementation libraries.goldfingerRx
-    implementation libraries.fbMessaging
+//    implementation libraries.fbMessaging
     implementation libraries.kotlinReflect
+
 }

@@ -15,12 +15,21 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.example.vtbhackathonproject.presentation.activity.MainActivity">
+        <activity android:name="com.example.vtbhackathonproject.presentation.activity.MainActivity"
+                android:theme="@style/AppTheme"
+                android:screenOrientation="portrait"
+                android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+                android:name="com.example.vtbhackathonproject.presentation.activity.LoginActivity"
+                android:label=""
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize">
         </activity>
 
         <service android:name=".services.FcmMessaging">

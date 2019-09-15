@@ -3,6 +3,7 @@ package com.example.vtbhackathonproject.presentation.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vtbhackathonproject.Payment
@@ -30,10 +31,19 @@ class CheckListAdapter : RecyclerView.Adapter<CheckListAdapter.CheckListViewHold
 
         private val tvRestarauntName : TextView = itemView.findViewById(R.id.tvRestaurantName)
         private val tvSum = itemView.findViewById<TextView>(R.id.tvSum)
+        private val ivStatus = itemView.findViewById<ImageView>(R.id.ivStatus)
 
         fun bind(payment: Payment) {
             tvRestarauntName.text = payment.status.toString()
             tvSum.text = payment.overallCost.toString()
+            ivStatus.setImageResource(getDrawable(payment.status!!))
         }
+
+        private fun getDrawable(status : Int) : Int = when(status) {
+            0 -> R.drawable.ic_clear_black_24dp
+            1 -> R.drawable.ic_keyboard_arrow_down_black_24dp
+            else -> R.drawable.ic_hourglass_24dp
+        }
+
     }
 }

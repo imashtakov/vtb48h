@@ -27,3 +27,10 @@ data class Participant(
     val status: Int? = null,
     val invoiceNumber: String? = null
 ) : Parcelable
+
+@Parcelize
+data class Receipt(
+    val total: Int? = null,
+    val description: String? = null,
+    val timestamp: Long? = null
+) : Parcelable

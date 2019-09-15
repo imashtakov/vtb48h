@@ -34,7 +34,7 @@ class CheckListAdapter : RecyclerView.Adapter<CheckListAdapter.CheckListViewHold
         private val ivStatus = itemView.findViewById<ImageView>(R.id.ivStatus)
 
         fun bind(payment: Payment) {
-            tvRestarauntName.text = "Чек на сумму: "
+            tvRestarauntName.text = payment.description
             tvSum.text = "${payment.overallCost.toString()} руб."
             ivStatus.setImageResource(getDrawable(payment.status!!))
         }

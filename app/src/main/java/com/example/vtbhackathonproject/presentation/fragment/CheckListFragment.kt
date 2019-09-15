@@ -25,7 +25,7 @@ class CheckListFragment(private val repository: LoginActivityRepository) : BaseF
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as LoginActivity).myToolbar.title = "Список квитанций"
+        (requireActivity() as LoginActivity).myToolbar.title = "Митапы"
         adapter = CheckListAdapter()
         rvChecks.adapter = adapter
         unsubscribeAfterward(model.getUserPayments(repository.userName!!)

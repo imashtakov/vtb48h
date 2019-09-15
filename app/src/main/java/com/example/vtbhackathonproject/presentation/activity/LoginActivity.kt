@@ -23,7 +23,7 @@ class LoginActivity : BaseActivity<LoginActivityRepository>() {
         setContentView(R.layout.activity_login)
         navigator = FragmentNavigator(supportFragmentManager)
         navigator.moveTo(LoginFragment(repository), false, R.id.container)
-        //navigator.moveTo(DistributeBillFragment(repository), false, R.id.container)
+//             navigator.moveTo(DistributeBillFragment(repository), false, R.id.container)
     }
 
     override fun initRepository(): LoginActivityRepository =

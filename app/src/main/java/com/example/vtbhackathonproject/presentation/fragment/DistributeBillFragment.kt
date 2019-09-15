@@ -15,10 +15,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.model.DistributeBillModel
+import com.example.vtbhackathonproject.model.entity.CreatePaymentRequest
+import com.example.vtbhackathonproject.model.entity.Payment
 import com.example.vtbhackathonproject.presentation.adapter.PayersAdapter
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.LoginActivityRepository
 import com.example.vtbhackathonproject.utils.ViewUtils
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_distribute_bill.*
 
 class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragment<DistributeBillModel>(repository) {
@@ -49,6 +52,24 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
 
     private fun initBtnListeners() {
         addPayerBtn.setOnClickListener { showAddPayerDialog() }
+        cancelBtn.setOnClickListener { navigator.backAt(CheckListFragment.TAG!!) }
+        doneBtn.setOnClickListener { sendInvoice() }
+    }
+
+    private fun sendInvoice() {
+        var sumOfPatrs = 0
+        for(payerItem in adapter.getPayerItems()) {
+            sumOfPatrs+= payerItem.amount
+        }
+        val ownerAmount = repository.sum?.minus(sumOfPatrs)
+        val payment = Payment(adapter.getPayerItems(), "gfsfse", ownerAmount!!, repository.sum!!)
+        val createPaymentRequest = CreatePaymentRequest(repository.userName!!, payment)
+        model.createPayment(createPaymentRequest)
+            .subscribe({
+                navigator.backAt(CheckListFragment.TAG!!)
+            }, {
+                Toast.makeText(requireContext(), "Что-то пошло не так", Toast.LENGTH_SHORT).show()
+            })
     }
 
     private fun showAddPayerDialog() {
@@ -75,17 +96,17 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
         val dialog = builder.create()
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                checkUserCreated(nameEt.text.toString(), dialog, nameEt)
+                checkUserCreated(nameEt.text.toString(), dialog)
             }
         }
         dialog.show()
     }
 
-    private fun checkUserCreated(name: String, dialog: DialogInterface, et: EditText) {
+    private fun checkUserCreated(name: String, dialog: DialogInterface) {
         Log.e("check", name)
         model.getUserAddress(name)
             .subscribe({
-                adapter.addPayer(name)
+                adapter.addPayer(name, it)
                 dialog.dismiss()
             }, {
                 Toast.makeText(requireContext(), "Такого пользователя нет в базе", Toast.LENGTH_SHORT).show()

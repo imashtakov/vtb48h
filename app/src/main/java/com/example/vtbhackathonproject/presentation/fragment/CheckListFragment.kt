@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.example.vtbhackathonproject.Payment
 import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.model.CheckListModel
+import com.example.vtbhackathonproject.presentation.activity.LoginActivity
 import com.example.vtbhackathonproject.presentation.adapter.CheckListAdapter
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.LoginActivityRepository
@@ -36,4 +37,9 @@ class CheckListFragment(private val repository: LoginActivityRepository) : BaseF
     }
 
     override fun initModel(): CheckListModel = CheckListModel()
+
+    companion object {
+        val TAG = CheckListFragment::class.simpleName
+    }
+
 }

@@ -24,11 +24,13 @@ class PayersAdapter: RecyclerView.Adapter<PayerItemViewHolder>() {
         holder.bind(payerItems[position])
     }
 
-    fun addPayer(name: String) {
-        payerItems.add(PayerItem(name, 0))
+    fun addPayer(name: String, address: String) {
+        payerItems.add(PayerItem(name, 0, address))
     }
 
     fun deletePayer(position: Int) {
         payerItems.remove(payerItems[position])
     }
+
+    fun getPayerItems(): ArrayList<PayerItem> = payerItems
 }

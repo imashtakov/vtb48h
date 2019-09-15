@@ -17,11 +17,13 @@ import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.model.DistributeBillModel
 import com.example.vtbhackathonproject.model.entity.CreatePaymentRequest
 import com.example.vtbhackathonproject.model.entity.Payment
+import com.example.vtbhackathonproject.presentation.activity.LoginActivity
 import com.example.vtbhackathonproject.presentation.adapter.PayersAdapter
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.LoginActivityRepository
 import com.example.vtbhackathonproject.utils.ViewUtils
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_distribute_bill.*
 import retrofit2.converter.gson.GsonConverterFactory
@@ -42,6 +44,7 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as LoginActivity).myToolbar.title = "Выбор плательщиков"
         initRecyclerView()
         initBtnListeners()
         countBill.text = "Ваш общий счет составляет: " + repository.sum

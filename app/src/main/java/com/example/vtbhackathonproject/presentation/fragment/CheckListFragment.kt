@@ -11,6 +11,7 @@ import com.example.vtbhackathonproject.presentation.activity.LoginActivity
 import com.example.vtbhackathonproject.presentation.adapter.CheckListAdapter
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.LoginActivityRepository
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_checklist.*
 
 class CheckListFragment(private val repository: LoginActivityRepository) : BaseFragment<CheckListModel>(repository) {
@@ -23,6 +24,7 @@ class CheckListFragment(private val repository: LoginActivityRepository) : BaseF
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as LoginActivity).myToolbar.title = "Список квитанций"
         adapter = CheckListAdapter()
         rvChecks.adapter = adapter
         unsubscribeAfterward(model.getUserPayments(repository.userName!!)

@@ -9,6 +9,7 @@ import com.example.vtbhackathonproject.presentation.fragment.DistributeBillFragm
 import com.example.vtbhackathonproject.presentation.fragment.LoginFragment
 import com.example.vtbhackathonproject.repository.LoginActivityRepository
 import com.google.firebase.FirebaseApp
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity<LoginActivityRepository>() {
 
@@ -20,6 +21,7 @@ class LoginActivity : BaseActivity<LoginActivityRepository>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setSupportActionBar(myToolbar)
         setContentView(R.layout.activity_login)
         navigator = FragmentNavigator(supportFragmentManager)
         navigator.moveTo(LoginFragment(repository), false, R.id.container)

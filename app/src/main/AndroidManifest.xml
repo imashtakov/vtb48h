@@ -18,8 +18,7 @@
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".presentation.activity.LoginActivity"
                 android:theme="@style/AppTheme"
-                android:screenOrientation="portrait"
-                android:label="">
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

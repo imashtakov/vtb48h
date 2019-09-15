@@ -137,7 +137,8 @@ class QrCodeFragment(private val repository: LoginActivityRepository) : BaseFrag
             barcodeList.forEach { _ ->
                 barcodeList[0].rawValue?.let {
                     try {
-                        repository.receipt = Gson().fromJson(it, Receipt::class.java)
+                        val receipt = Gson().fromJson(it, Receipt::class.java)
+                        repository.sum = receipt.total
                         navigator.moveTo(
                             DistributeBillFragment(activityRepository as LoginActivityRepository),
                             true,

@@ -5,5 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class CreatePaymentRequest(val username: String,
-                                val payment: Payment) : Parcelable{
+                                val payment: Payment) : Parcelable {
 }

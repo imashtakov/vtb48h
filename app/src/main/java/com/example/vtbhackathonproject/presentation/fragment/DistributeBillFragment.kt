@@ -68,7 +68,7 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
         }
         val ownerAmount = repository.sum?.minus(sumOfPatrs)
         val payment = Payment(adapter.getPayerItems(), repository.userName!!, ownerAmount!!, repository.sum!!)
-        val createPaymentRequest = CreatePaymentRequest("ilja.chitneev@gmail.com", payment)
+        val createPaymentRequest = CreatePaymentRequest(repository.userName!!, payment)
         val gson = Gson()
         val paymentJson = gson.toJson(createPaymentRequest)
         model.createPayment(paymentJson)

@@ -48,7 +48,7 @@ class DistributeBillFragment(val repository: LoginActivityRepository) : BaseFrag
         initRecyclerView()
         initBtnListeners()
         (requireActivity() as LoginActivity).myToolbar.title =
-            "Ваш общий счет составляет: " + repository.receipt!!.total!! + " руб"
+            "Сумма: " + repository.receipt!!.total!! + " руб"
         countBill.text = "Остаток: ${(repository.receipt!!.total!! - adapter.amount)} руб"
     }
 
@@ -78,12 +78,12 @@ class DistributeBillFragment(val repository: LoginActivityRepository) : BaseFrag
         val createPaymentRequest = CreatePaymentRequest(repository.userName!!, payment)
         val gson = Gson()
         val paymentJson = gson.toJson(createPaymentRequest)
-        model.createPayment(paymentJson)
+        unsubscribeAfterward(model.createPayment(paymentJson)
             .subscribe({
                 navigator.backAt(CheckListFragment.TAG!!)
             }, {
                 Toast.makeText(requireContext(), "Что-то пошло не так", Toast.LENGTH_SHORT).show()
-            })
+            }))
     }
 
     private fun showAddPayerDialog() {

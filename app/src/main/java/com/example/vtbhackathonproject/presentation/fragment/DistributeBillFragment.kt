@@ -21,8 +21,10 @@ import com.example.vtbhackathonproject.presentation.adapter.PayersAdapter
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.LoginActivityRepository
 import com.example.vtbhackathonproject.utils.ViewUtils
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_distribute_bill.*
+import retrofit2.converter.gson.GsonConverterFactory
 
 class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragment<DistributeBillModel>(repository) {
 
@@ -62,9 +64,11 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
             sumOfPatrs+= payerItem.amount
         }
         val ownerAmount = repository.sum?.minus(sumOfPatrs)
-        val payment = Payment(adapter.getPayerItems(), "gfsfse", ownerAmount!!, repository.sum!!)
-        val createPaymentRequest = CreatePaymentRequest(repository.userName!!, payment)
-        model.createPayment(createPaymentRequest)
+        val payment = Payment(adapter.getPayerItems(), repository.userName!!, ownerAmount!!, repository.sum!!)
+        val createPaymentRequest = CreatePaymentRequest("ilja.chitneev@gmail.com", payment)
+        val gson = Gson()
+        val paymentJson = gson.toJson(createPaymentRequest)
+        model.createPayment(paymentJson)
             .subscribe({
                 navigator.backAt(CheckListFragment.TAG!!)
             }, {
@@ -103,7 +107,6 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
     }
 
     private fun checkUserCreated(name: String, dialog: DialogInterface) {
-        Log.e("check", name)
         model.getUserAddress(name)
             .subscribe({
                 adapter.addPayer(name, it)

@@ -1,5 +1,6 @@
 package com.example.vtbhackathonproject.model
 
+import android.util.Log
 import com.example.vtbhackathonproject.model.base.BaseModel
 import com.example.vtbhackathonproject.model.entity.CreatePaymentRequest
 import io.reactivex.Single
@@ -25,12 +26,12 @@ class DistributeBillModel: BaseModel() {
             }
     }
 
-    fun createPayment(paymentRequest: CreatePaymentRequest): Single<Any> = Single.create { subscriber ->
+    fun createPayment(paymentRequest: String): Single<Any> = Single.create { subscriber ->
         fbFunctions.getHttpsCallable("createPayment")
             .call(paymentRequest)
             .addOnSuccessListener {
                 if (!subscriber.isDisposed) {
-                    subscriber.onSuccess(Any())
+                    subscriber.onSuccess(it.data.toString())
                 }
             }
             .addOnFailureListener {task ->

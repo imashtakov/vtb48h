@@ -23,6 +23,8 @@ import android.view.ViewGroup
 import androidx.camera.core.*
 import androidx.lifecycle.LifecycleOwner
 import com.example.vtbhackathonproject.R
+import com.example.vtbhackathonproject.Receipt
+import com.example.vtbhackathonproject.repository.LoginActivityRepository
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
@@ -33,9 +35,11 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
 import kotlinx.android.synthetic.main.fragment_scan_qr_code.*
 import java.util.concurrent.TimeUnit
 import com.google.firebase.functions.FirebaseFunctions
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 
 
-class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(repository), LifecycleOwner {
+class QrCodeFragment(private val repository: LoginActivityRepository) : BaseFragment<QrCodeModel>(repository), LifecycleOwner {
 
     private lateinit var preview: Preview
     private val lastAnalyzedStamp = 0L
@@ -101,8 +105,10 @@ class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(rep
 
                 val timestamp = System.currentTimeMillis()
                 if (timestamp - lastAnalyzedStamp >= TimeUnit.SECONDS.toMillis(1)) {
-                    val visionImage = FirebaseVisionImage.fromMediaImage(imageProxy.image!!,
-                        getOrientationFromRotation(rotationDegrees))
+                    val visionImage = FirebaseVisionImage.fromMediaImage(
+                        imageProxy.image!!,
+                        getOrientationFromRotation(rotationDegrees)
+                    )
 
                     runBarcodeScanner(visionImage)
                 }
@@ -128,9 +134,18 @@ class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(rep
 
     private fun runBarcodeScanner(image: FirebaseVisionImage) {
         detector.detectInImage(image).addOnSuccessListener { barcodeList ->
-            barcodeList.forEach { _->
+            barcodeList.forEach { _ ->
                 barcodeList[0].rawValue?.let {
-                    //TODO
+                    try {
+                        repository.receipt = Gson().fromJson(it, Receipt::class.java)
+                        navigator.moveTo(
+                            DistributeBillFragment(activityRepository as LoginActivityRepository),
+                            true,
+                            R.id.container
+                        )
+                    } catch (e : JsonSyntaxException) {
+
+                    }
                 }
             }
         }
@@ -142,7 +157,7 @@ class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(rep
         val centerX = cameraView.width / 2f
         val centerY = cameraView.height / 2f
 
-        val rotationDegrees = when(cameraView.display.rotation) {
+        val rotationDegrees = when (cameraView.display.rotation) {
             Surface.ROTATION_0 -> 0
             Surface.ROTATION_90 -> 90
             Surface.ROTATION_180 -> 180
@@ -164,7 +179,7 @@ class QrCodeFragment(repository: BaseRepository) : BaseFragment<QrCodeModel>(rep
         }
     }
 
-    private fun mayRequestCamera() : Boolean {
+    private fun mayRequestCamera(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (activity?.checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 return true

@@ -28,9 +28,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_distribute_bill.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragment<DistributeBillModel>(repository) {
-
-    private val adapter = PayersAdapter()
+class DistributeBillFragment(val repository: LoginActivityRepository) : BaseFragment<DistributeBillModel>(repository),
+    PayersAdapter.AmountChangeListener {
+    private val adapter = PayersAdapter(this)
 
     override fun initModel(): DistributeBillModel = DistributeBillModel()
 
@@ -47,7 +47,13 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
         (requireActivity() as LoginActivity).myToolbar.title = "Выбор плательщиков"
         initRecyclerView()
         initBtnListeners()
-        countBill.text = "Ваш общий счет составляет: " + repository.sum
+        (requireActivity() as LoginActivity).myToolbar.title =
+            "Ваш общий счет составляет: " + repository.receipt!!.total!! + " руб"
+        countBill.text = "Остаток: ${(repository.receipt!!.total!! - adapter.amount)} руб"
+    }
+
+    override fun onAmountChange(amount: Int) {
+        countBill.text = "Остаток: ${(repository.receipt!!.total!! - adapter.amount)} руб"
     }
 
     private fun initRecyclerView() {
@@ -63,11 +69,12 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
 
     private fun sendInvoice() {
         var sumOfPatrs = 0
-        for(payerItem in adapter.getPayerItems()) {
-            sumOfPatrs+= payerItem.amount
+        for (payerItem in adapter.getPayerItems()) {
+            sumOfPatrs += payerItem.amount
         }
-        val ownerAmount = repository.sum?.minus(sumOfPatrs)
-        val payment = Payment(adapter.getPayerItems(), repository.userName!!, ownerAmount!!, repository.sum!!)
+        val ownerAmount = repository.receipt!!.total!!.minus(sumOfPatrs)
+        val payment =
+            Payment(adapter.getPayerItems(), repository.userName!!, ownerAmount!!, repository.receipt!!.total!!)
         val createPaymentRequest = CreatePaymentRequest(repository.userName!!, payment)
         val gson = Gson()
         val paymentJson = gson.toJson(createPaymentRequest)
@@ -87,7 +94,8 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
         val nameEt = EditText(activity)
         val lp = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.MATCH_PARENT)
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
         context?.let {
             lp.marginStart = ViewUtils.convertDpToPixel(16f, it).toInt()
             lp.marginEnd = ViewUtils.convertDpToPixel(16f, it).toInt()
@@ -96,9 +104,9 @@ class DistributeBillFragment(val repository: LoginActivityRepository): BaseFragm
         builder.setView(nameEt)
 
         builder
-            .setNegativeButton("ОТМЕНА") {dialog, _ ->
-            dialog.dismiss()
-        }
+            .setNegativeButton("ОТМЕНА") { dialog, _ ->
+                dialog.dismiss()
+            }
             .setPositiveButton("ДОБАВИТЬ", null)
         val dialog = builder.create()
         dialog.setOnShowListener {

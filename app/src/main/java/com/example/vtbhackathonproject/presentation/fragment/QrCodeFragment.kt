@@ -140,6 +140,7 @@ class QrCodeFragment(private val repository: LoginActivityRepository) : BaseFrag
                     try {
                         val receipt = Gson().fromJson(it, Receipt::class.java)
                         repository.sum = receipt.total
+                        repository.receipt = receipt
                         navigator.moveTo(
                             DistributeBillFragment(activityRepository as LoginActivityRepository),
                             true,

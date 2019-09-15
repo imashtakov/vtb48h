@@ -7,7 +7,9 @@ import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.model.entity.PayerItem
 import com.example.vtbhackathonproject.presentation.adapter.holder.PayerItemViewHolder
 
-class PayersAdapter: RecyclerView.Adapter<PayerItemViewHolder>() {
+class PayersAdapter(private var amountChangeListener: AmountChangeListener?= null): RecyclerView.Adapter<PayerItemViewHolder>(), PayerItemViewHolder.PayerAmountChangeLister {
+
+    var amount : Int = 0
 
     private var payerItems = ArrayList<PayerItem>()
 
@@ -15,13 +17,18 @@ class PayersAdapter: RecyclerView.Adapter<PayerItemViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_payer, parent, false)
 
-        return PayerItemViewHolder(view)
+        return PayerItemViewHolder(view, this)
     }
 
     override fun getItemCount(): Int = payerItems.size
 
     override fun onBindViewHolder(holder: PayerItemViewHolder, position: Int) {
         holder.bind(payerItems[position])
+    }
+
+    override fun onPayerAmountChange(diff: Int) {
+        amount -= diff
+        amountChangeListener?.onAmountChange(amount)
     }
 
     fun addPayer(name: String, address: String) {
@@ -33,4 +40,8 @@ class PayersAdapter: RecyclerView.Adapter<PayerItemViewHolder>() {
     }
 
     fun getPayerItems(): ArrayList<PayerItem> = payerItems
+
+    interface AmountChangeListener {
+        fun onAmountChange(amount : Int)
+    }
 }

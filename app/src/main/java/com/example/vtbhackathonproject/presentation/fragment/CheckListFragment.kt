@@ -31,7 +31,7 @@ class CheckListFragment(private val repository: LoginActivityRepository) : BaseF
                 fab.show()
             }, {}))
         fab.setOnClickListener {
-            navigator.moveTo(QrCodeFragment(repository), false, R.id.container)
+            navigator.moveTo(QrCodeFragment(repository), true, R.id.container)
         }
 
     }

@@ -4,7 +4,6 @@
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/black"
         >
 
     <TextView
@@ -14,6 +13,7 @@
             android:layout_marginTop="@dimen/margin_16dp"
             android:layout_marginStart="@dimen/margin_16dp"
             android:layout_marginEnd="@dimen/margin_16dp"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_size_18sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="editTextBackground">@color/white</item>
+        <item name="editTextBackground">@color/shadow_camera</item>
         <item name="toolbarStyle">@style/ToolbarTextStyle</item>
         <item name="buttonStyle">@style/ButtonMainStyle</item>
         <item name="alertDialogStyle">@style/AlertStyle</item>

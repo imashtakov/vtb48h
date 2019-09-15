@@ -23,21 +23,19 @@ class CheckListFragment(private val repository: LoginActivityRepository) : BaseF
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = CheckListAdapter()
-        adapter.payments = listOf(
-            Payment(emptyList(), "", 24, 24),
-            Payment(emptyList(), "", 24, 24),
-            Payment(emptyList(), "", 24, 24),
-            Payment(emptyList(), "", 24, 24)
-        )
+//        adapter.payments = listOf(
+//            Payment(emptyList(), "", 24, 24),
+//            Payment(emptyList(), "", 24, 24),
+//            Payment(emptyList(), "", 24, 24),
+//            Payment(emptyList(), "", 24, 24)
+//        )
         rvChecks.adapter = adapter
         unsubscribeAfterward(model.getUserPayments(repository.userName!!)
-            .subscribe ( {
-
+            .subscribe ( { result ->
+                adapter.payments = result
             }, {}))
         fab.setOnClickListener {
-            repository.userName?.let {
-                model.getUserPayments(it)
-            }
+            navigator.moveTo(QrCodeFragment(repository), true, R.id.container)
         }
     }
 

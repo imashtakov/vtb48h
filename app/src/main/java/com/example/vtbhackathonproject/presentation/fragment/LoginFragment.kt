@@ -32,6 +32,7 @@ class LoginFragment(private val repository: LoginActivityRepository) : BaseFragm
 //                .observeOn(Schedulers.io())
 //                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe{ address ->
+                    repository.userName = etLoginName.text.toString()
                     repository.saveAddress(address)
                     navigator.moveTo(CheckListFragment(repository), true, R.id.container)
                 }

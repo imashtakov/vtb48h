@@ -5,6 +5,8 @@ import com.example.vtbhackathonproject.repository.base.BaseRepository
 
 class LoginActivityRepository(prefereces : SharedPreferences): BaseRepository(prefereces) {
 
+    var userName : String? = null
+
     fun saveAddress(address : String) {
         preferences.edit().putString("OwnerAddress", address).apply()
     }

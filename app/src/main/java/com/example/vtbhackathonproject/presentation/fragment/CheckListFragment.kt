@@ -13,6 +13,7 @@ import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.LoginActivityRepository
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_checklist.*
+import java.util.concurrent.TimeUnit
 
 class CheckListFragment(private val repository: LoginActivityRepository) : BaseFragment<CheckListModel>(repository) {
 
@@ -28,6 +29,7 @@ class CheckListFragment(private val repository: LoginActivityRepository) : BaseF
         adapter = CheckListAdapter()
         rvChecks.adapter = adapter
         unsubscribeAfterward(model.getUserPayments(repository.userName!!)
+            .repeatWhen { observable -> observable.delay(60, TimeUnit.SECONDS) }
             .subscribe ( { result ->
                 adapter.payments = result
                 fab.show()

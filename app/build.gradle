@@ -6,6 +6,9 @@ apply plugin: "$gradlePlugins.kotlin"
 apply plugin: "$gradlePlugins.kotlinExtensions"
 apply plugin: "$gradlePlugins.kapt"
 apply plugin: "$gradlePlugins.realm"
+apply plugin: "$gradlePlugins.googleServices"
+
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -42,7 +45,14 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+
+
+    implementation "androidx.camera:camera-core:1.0.0-alpha02"
+    implementation "androidx.camera:camera-camera2:1.0.0-alpha02"
+
+    implementation 'com.google.firebase:firebase-core:17.2.0'
+    implementation 'com.google.firebase:firebase-ml-vision:23.0.0'
 
     implementation libraries.picasso
     implementation libraries.retrofit
@@ -50,9 +60,15 @@ dependencies {
     implementation libraries.gson
     implementation libraries.gsonConverter
     implementation libraries.rxjava
+    implementation libraries.rxAndroid
     implementation libraries.goldfinger
     implementation libraries.goldfingerRx
-//    implementation libraries.fbMessaging
+    implementation libraries.fbMessaging
     implementation libraries.kotlinReflect
+    implementation libraries.fbFunctions
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.8'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
 
 }

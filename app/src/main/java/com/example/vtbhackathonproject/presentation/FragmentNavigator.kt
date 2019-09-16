@@ -12,6 +12,7 @@ class FragmentNavigator(private val fm: FragmentManager) {
         if (addTransactionToBackStack) {
             transaction.addToBackStack(fragment.javaClass.simpleName)
         }
+        transaction.commitAllowingStateLoss()
     }
 
     fun backAt(transactionName : String) {

@@ -8,6 +8,7 @@ import com.example.vtbhackathonproject.R
 import com.example.vtbhackathonproject.model.TestModel
 import com.example.vtbhackathonproject.presentation.base.BaseFragment
 import com.example.vtbhackathonproject.repository.MainActivityRepository
+import com.google.firebase.functions.FirebaseFunctions
 
 class TestFragment2(repository: MainActivityRepository) : BaseFragment<TestModel>(repository) {
 

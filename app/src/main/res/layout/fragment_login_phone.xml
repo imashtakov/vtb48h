@@ -1,63 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:orientation="vertical"
+        tools:context=".presentation.activity.LoginActivity">
 
-    <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
-            android:layout_height="?attr/actionBarSize"
-            app:titleTextAppearance="@style/ToolbarTextStyle"
-            app:title="Авторизация"
-            app:titleTextColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/enterPhoneTv"
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16dp"
-            android:layout_marginEnd="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:text="Введите номер телефона:"
-            android:textSize="@dimen/text_size_16sp"
-            style="@style/ToolbarTextStyle"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/sendBtn"
+            app:layout_constraintEnd_toEndOf="@id/sendBtn"
+            app:layout_constraintStart_toStartOf="@id/sendBtn"
+            app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLoginName"
+                android:background="@color/transparent"
+                android:hint="Ваш логин"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <requestFocus/>
 
-    <EditText
-            android:id="@+id/phoneEt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:layout_marginEnd="@dimen/margin_16dp"
-            android:focusable="true"
-            android:background="@drawable/phone_et_background"
-            android:inputType="phone"
-            android:digits="1234567890() +"
-            android:maxLines="1"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto"
-            android:textCursorDrawable="@drawable/cursor_color_black"
-            android:textSize="@dimen/text_size_25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/enterPhoneTv" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+            android:id="@+id/sendBtn"
+            style="@style/ButtonMainStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/ButtonMainStyle"
-            android:layout_marginStart="@dimen/margin_24dp"
-            android:layout_marginEnd="@dimen/margin_24dp"
-            android:layout_marginBottom="@dimen/margin_24dp"
-            android:text="Отправить"
+            android:layout_margin="@dimen/margin_24dp"
+            android:text="Продолжить"
+            app:layout_constraintTop_toBottomOf="@id/tiLayout"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

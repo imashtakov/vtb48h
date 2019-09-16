@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "786091642367",
+    "firebase_url": "https://vtbhack.firebaseio.com",
+    "project_id": "vtbhack",
+    "storage_bucket": "vtbhack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786091642367:android:c17ab4586931597aa9abca",
+        "android_client_info": {
+          "package_name": "com.example.vtbhackathonproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786091642367-ioi1lujlvkk8ufob56j73ucrqgstjeun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdEetR2GGR_-Rz75-YqxQPTx7cp4-Ekzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786091642367-ioi1lujlvkk8ufob56j73ucrqgstjeun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786091642367:android:8adfe3d2997987fba9abca",
+        "android_client_info": {
+          "package_name": "com.metadevs.vtbhack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786091642367-ioi1lujlvkk8ufob56j73ucrqgstjeun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdEetR2GGR_-Rz75-YqxQPTx7cp4-Ekzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786091642367-ioi1lujlvkk8ufob56j73ucrqgstjeun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
